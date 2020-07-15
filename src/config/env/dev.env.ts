@@ -32,4 +32,5 @@ export default {
     FACEBOOK_ID: "",
     FACEBOOK_SECRET: "",
   },
+  jwt_secret: 'Token desarrollo'
 };

@@ -10,4 +10,4 @@ export const env = (process.env.NODE_ENV = process.env.NODE_ENV || "development"
 let envConfig = env === "production" ? prod.default : dev.default;
 export const db = envConfig.db
 export const smtp = envConfig.smtp;
-
+export const jwt_secret = envConfig.jwt_secret;

@@ -1,5 +1,6 @@
 {
 	"Hello": "Hallo",	
   	"Testen %1 - %2": "Testen %1 - %2",
-	"Hello %s": "Hallo %s"
+	"Hello %s": "Hallo %s",
+	"error": "Ein unerwarteter Fehler ist aufgetreten"
 }

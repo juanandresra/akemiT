@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne,JoinColumn, CreateDateColumn, UpdateDateColumn, BeforeUpdate, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne,JoinColumn, CreateDateColumn, UpdateDateColumn, BeforeUpdate, BeforeInsert, OneToMany } from "typeorm";
 import { Country } from "./country.entity";
 import * as bcrypt from "bcrypt";
 import { Length, IsEmail, ValidationArguments ,  } from "class-validator";
 import { __, __l } from "i18n";
+import { Session } from "./session.entity";
 
 @Entity()
 export class User {
@@ -58,6 +59,9 @@ export class User {
   checkPassword(password: string): boolean {
     return bcrypt.compareSync(password, this.password);
   }
+  
+  @OneToMany(() => Session, (session) => session.user)
+  sessions?: Session[];
   
   public constructor(init?: Partial<User>) {
     Object.assign(this, init);

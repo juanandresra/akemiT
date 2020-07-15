@@ -6,7 +6,9 @@ import { indexWelcome } from "../controllers/index.controller";
 
 import { indexUser, allUser, addUser } from "../controllers/user.controller";
 import { indexCountry, testCountry, updateCountry } from "../controllers/country.controller";
-import { loginAuth } from "../controllers/auth.controller";
+import { loginAuth, validateAuth } from "../controllers/auth.controller";
+
+import { isAuth } from "../middlewares/auth";
 
 router.route('/').get(indexWelcome)
 
@@ -20,6 +22,9 @@ router.route("/country/edit").get(updateCountry)
 import bodyParser from "body-parser";
 
 
-router.route("/auth/login").post(loginAuth)
+router.route("/auth/login").post(loginAuth);
+
+router.route("/auth/validate").post(isAuth,validateAuth);
+
 
 export default router;
