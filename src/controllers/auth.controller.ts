@@ -36,15 +36,11 @@ export async function loginAuth(req: Request, res: Response): Promise<Response> 
 
 export async function validateAuth(req: Request, res: Response): Promise<Response> {
     
-    const { token } = req.body;
 
-    console.log("*******************************")
-    console.log(req.body.user)
-    console.log("*******************************")
 
     try {
 
-        return res.status(200).json(responseSuccess(tokenValidate(token)));
+        return res.status(200).json(responseSuccess(req.body.user));
 
     } catch (e) {
 

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm";
 import { User } from "./user.entity";
+import { type } from "os";
 
 @Entity()
 export class Session {
@@ -22,9 +23,8 @@ export class Session {
     @Column()
     user_id!: number;
 
-    @OneToMany(() => User, (user) => user.sessions)
-    @JoinColumn({ name: 'user_id' })
-
+    @ManyToOne(type => User, user => user.sessions)
+    @JoinColumn([{ name: 'user_id' }, {name: 'email'}])
     user!: User;
 
     @Column()

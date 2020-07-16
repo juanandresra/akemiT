@@ -60,7 +60,7 @@ export class User {
     return bcrypt.compareSync(password, this.password);
   }
   
-  @OneToMany(() => Session, (session) => session.user)
+  @OneToMany(type => Session, session => session.user)
   sessions?: Session[];
   
   public constructor(init?: Partial<User>) {

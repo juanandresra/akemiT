@@ -42,15 +42,17 @@ export class AuthRepository extends Repository<User> {
         };
     }
 
-    async validate(email: string, hash: string) {        
-
-        console.log("EMAIL", email,"HASH",hash)
-        const sessionRepository = getRepository(Session);
-
+    async validate(email: string, hash: string) {      
         try {
-            return await sessionRepository.findOneOrFail({ where: { hash: hash  } })
+            return (await getRepository(Session)
+                .createQueryBuilder("session")
+                .innerJoinAndSelect("session.user", "user")
+                .where("session.hash = :hash", { hash: hash })
+                .andWhere("user.email = :email", { email: email })
+                .select("user.id")
+                .getRawOne()).user_id;     
         } catch (e) {
-            throw { message: 'Email or Password incorrect!!' };
+            throw { message: 'Invalid token!!' };
         }
     }
 
